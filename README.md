@@ -1,13 +1,41 @@
-The current project entails scraping data from The College of New Jersey's atrium, Eickhoff. The script was developed 
-using the browser's developer tool's, such as snippets, console, and DOM elements. Because the website is
-developed entirely through angular.js, the script deals with the complexities dynamic rendering. These dynamic changes
-occur in the DOM when a different web elements are interacted with, causing changes in elements' class name, 
-child nodes, and other DOM features. Static web-scraping becomes inefficient because of the DOM's inconsistencies.
-Therefore, the scraping algorithm implements mutation observers which effectively locate specific DOM changes
-benefitting the scraping procedure. Additionally, the data is heavily structured, making dicitionaries the
-primary data structure for data storage and categorization. Lastly, the code's shortcomings are primarily rooted in
-network issues and DOM rendering. Due to the vast number of requests made to the server, it can create dynamic network 
-and DOM rendering issues. Overall, the algorithm is inconsistent due to the aforementioned issues that lie majority in the
-network. However, positive results show that the returned dictionary contains accurate days, dining times(breakfast, lunch, brunch, dinner), food stations,
-and foods offered at those stations paired with their calories. This data will be presented on an accessible mobile user-interface, accessible for TCNJ
-students who would like reliable and quick meal plans.
+This Hackathon project focuses on web scraping dynamic content from The College of New Jersey’s Eickhoff Dining Hall website, which is rendered using Angular.js. The primary goal is to extract structured, up-to-date meal information—including available dining timings(Breakfast, Lunch, Brunch, Dinner), food stations, individual menu items, and calorie data, and make it accessible via a mobile-friendly UI for the TCNJ student community.
+
+**Key Challenges**
+
+**1. Dynamic DOM Rendering**
+The site uses Angular.js, meaning the DOM updates dynamically in response to user interaction, therefore elements such as class names, child nodes, and hierarchical structures change frequently with clicks between DOM elements.
+
+**2. Limitations of Static Scraping**
+Traditional static scraping fails due to:
+- Frequent DOM mutations
+- Asynchronous content loading
+- Inconsistent element paths and structures
+
+To effectievly counterract these issues, the backend algorithm implements the following techniques:
+
+**Mutation Observers**
+- Detect changes in the DOM tree in real time.
+- Efficiently tracks when new menu content is injected into the DOM.
+- Allows the script to wait for and scrape the correct data regardless of when it appears.
+
+**Structured Data Collection**
+The returned data is parsed into nested JavaScript dictionaries for organization:
+
+Date
+  Meal times available (e.g., only breakfast and dinner)
+    Food stations
+      Item names and their associated calories
+
+This is the formatted structure for all scraped data.
+
+**Current Limitations**
+- Network Reliability: Frequent requests can overload or delay content rendering from the server.
+- DOM Inconsistency: Angular rendering may introduce subtle timing issues where data appears after the scraper has run.
+- No Direct API: The lack of a public API necessitates scraping and handling client-side rendering behavior manually.
+
+**Future Plans/Use Case**
+- Develop a mobile user interface to display the scraped data for students in a clean, accessible format.
+- TCNJ students can use this tool to:
+  - Check meal options for the day in real-time
+  - Plan meals based on calorie needs or dietary preferences
+  - Avoid long wait times by reviewing station offerings in advance
